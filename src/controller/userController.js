@@ -1,25 +1,5 @@
 const User = require('../services/User');
 const { tokenGenerator } = require('../utils/token');
-// const validateBody = (body) =>
-
-//     .validate(body);
-
-// module.exports = async (req, res, next) => {
-//     const data = req.body;
-//     const { error } = validateBody(data);
-
-//     if (error) return res.status(200).json({ message: error.message });
-
-//     const payload = {
-//         email: data.email,
-//     };
-
-//     const token = jwt.sign(payload, JWT_SECRET, {
-//         expiresIn: '1h',
-//     });
-
-//     res.status(200).json({ token });
-// };
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -32,6 +12,20 @@ const login = async (req, res) => {
     res.status(200).json({ token });
 };
 
+const createUser = async (req, res) => {
+    const { displayName, email, password, image } = req.body;
+try {
+    const { type, message } = await User.createUser(displayName, email, password, image);
+
+    if (type) return res.status(400).json({ message });
+
+    const token = tokenGenerator({ email });
+    res.status(201).json({ token });
+} catch (e) {
+    res.status(409).json({ message: 'User already registered' });
+}
+};
 module.exports = {
     login,
+    createUser,
 };
