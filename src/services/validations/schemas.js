@@ -9,6 +9,14 @@ const addUserLogin = Joi.object({
     'any.required': 'Some required fields are missing',
 });
 
+const addNewUser = Joi.object({
+    displayName: Joi.string().min(8).required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required(),
+    image: Joi.string(),
+});
+
 module.exports = {
     addUserLogin,
+    addNewUser,
 };
