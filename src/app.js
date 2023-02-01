@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.get('/user', validateJWT, userController.getAll);
 app.post('/login', userController.login);
-app.post('/user', validateJWT, userController.createUser);
+app.post('/user', userController.createUser);
 // ...
 
 // É importante exportar a constante `app`,
