@@ -19,7 +19,7 @@ try {
 
     if (type) return res.status(400).json({ message });
 
-    const token = tokenGenerator({ email });
+    const token = tokenGenerator({ displayName, email });
     console.log(token);
     res.status(201).json({ token });
 } catch (e) {
