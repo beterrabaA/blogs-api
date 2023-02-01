@@ -2,7 +2,7 @@ const { User } = require('../models');
 const schema = require('./validations/validationsInputValues');
 
 const getAll = async () => {
-    const users = await User.findAll();
+    const users = await User.findAll({ attributes: { exclude: ['password'] } });
 
     return { type: '', message: users };
 };
