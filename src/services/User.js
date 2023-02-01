@@ -1,6 +1,12 @@
 const { User } = require('../models');
 const schema = require('./validations/validationsInputValues');
 
+const getAll = async () => {
+    const users = await User.findAll();
+
+    return { type: '', message: users };
+};
+
 const getUserLogin = async (email, password) => {
     const error = schema.validateLogin({ email, password });
     if (error.type) return error;
@@ -30,6 +36,7 @@ const createUser = async (displayName, email, password, image) => {
 };
 
 module.exports = {
+    getAll,
     getUserLogin,
     createUser,
     getUserByEmail,

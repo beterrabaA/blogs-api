@@ -20,12 +20,23 @@ try {
     if (type) return res.status(400).json({ message });
 
     const token = tokenGenerator({ email });
+    console.log(token);
     res.status(201).json({ token });
 } catch (e) {
     res.status(409).json({ message: 'User already registered' });
 }
 };
+
+const getAll = async (req, res) => {
+    const { type, message } = await User.getAll();
+
+    if (type) return res.status(400).json({ message });
+
+    res.status(200).json(message);
+};
+
 module.exports = {
     login,
     createUser,
+    getAll,
 };

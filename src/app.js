@@ -6,6 +6,7 @@ const validateJWT = require('./auth/validateJWT');
 const app = express();
 
 app.use(express.json());
+app.get('/user', validateJWT, userController.getAll);
 app.post('/login', userController.login);
 app.post('/user', validateJWT, userController.createUser);
 // ...
