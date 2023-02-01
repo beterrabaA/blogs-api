@@ -7,6 +7,7 @@ const app = express();
 
 app.use(express.json());
 app.get('/user', validateJWT, userController.getAll);
+app.get('/user/:id', validateJWT, userController.getById);
 app.post('/login', userController.login);
 app.post('/user', userController.createUser);
 // ...
