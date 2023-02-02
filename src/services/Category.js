@@ -1,5 +1,5 @@
 const { Category } = require('../models');
-// const schema = require('./validations/validationsInputValues');
+const schema = require('./validations/validationsInputValues');
 
 const getAll = async () => {
     const categories = await Category.findAll();
@@ -8,8 +8,8 @@ const getAll = async () => {
 };
 
 const createCategory = async (name) => {
-    // const error = schema.validateUser({ displayName, email, password, image });
-    // if (error.type) return error;
+    const error = schema.validateCat({ name });
+    if (error.type) return error;
 
     const newCategory = await Category.create({ name });
 
