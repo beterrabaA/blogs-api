@@ -12,6 +12,7 @@ app.post('/login', userController.login);
 app.post('/user', userController.createUser);
 
 app.get('/categories', validateJWT, catController.getAll);
+app.post('/categories', validateJWT, catController.createCat);
 // ...
 
 // É importante exportar a constante `app`,
