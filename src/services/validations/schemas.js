@@ -1,5 +1,7 @@
 const Joi = require('joi');
 
+const pointSchema = Joi.string().empty('').required();
+
 const addUserLogin = Joi.object({
     email: Joi.string().email().empty('').required(),
     password: Joi.string().empty('').required(),
@@ -16,7 +18,12 @@ const addNewUser = Joi.object({
     image: Joi.string(),
 });
 
+const addNewCategory = Joi.object({
+    name: pointSchema,
+});
+
 module.exports = {
     addUserLogin,
     addNewUser,
+    addNewCategory,
 };

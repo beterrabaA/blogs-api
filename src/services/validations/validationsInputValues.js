@@ -1,4 +1,4 @@
-const { addUserLogin, addNewUser } = require('./schemas');
+const { addUserLogin, addNewUser, addNewCategory } = require('./schemas');
 
 const validateLogin = (login) => {
     const { error } = addUserLogin.validate(login);
@@ -15,7 +15,16 @@ const validateUser = (data) => {
     return { type: null, message: '' };
 };
 
+const validateCat = (name) => {
+    const { error } = addNewCategory.validate(name);
+
+    if (error) return { type: 'INVALID_VALUE', message: error.message };
+
+    return { type: null, message: '' };
+};
+
 module.exports = {
     validateLogin,
     validateUser,
+    validateCat,
 };
