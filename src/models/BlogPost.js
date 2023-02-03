@@ -6,8 +6,14 @@ module.exports = (sequelize, DataTypes) => {
         title: DataTypes.STRING(255),
         content: DataTypes.STRING(255),
         userId: { type: DataTypes.INTEGER, foreignKey: true },
-        published: DataTypes.DATE,
-        updated: DataTypes.DATE,
+        published: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+        },
+        updated: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+        },
     },
         {
             timestamps: false,
@@ -15,10 +21,10 @@ module.exports = (sequelize, DataTypes) => {
             underscored: true,
         });
 
-        BlogPost.associate = (models) => {
-            BlogPost.belongsTo(models.User,
-              { foreignKey: 'userId', as: 'users' });
-          };
+    BlogPost.associate = (models) => {
+        BlogPost.belongsTo(models.User,
+            { foreignKey: 'userId', as: 'users' });
+    };
 
     return BlogPost;
 };
