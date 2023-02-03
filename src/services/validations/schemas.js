@@ -1,14 +1,15 @@
 const Joi = require('joi');
 
 const pointSchema = Joi.string().empty('').required();
+const SOME_REQUIRED_FIELDS = 'Some required fields are missing';
 
 const addUserLogin = Joi.object({
     email: Joi.string().email().empty('').required(),
     password: Joi.string().empty('').required(),
 }).messages({
-    'string.email': 'Some required fields are missing',
-    'string.empty': 'Some required fields are missing',
-    'any.required': 'Some required fields are missing',
+    'string.email': SOME_REQUIRED_FIELDS,
+    'string.empty': SOME_REQUIRED_FIELDS,
+    'any.required': SOME_REQUIRED_FIELDS,
 });
 
 const addNewUser = Joi.object({
@@ -22,8 +23,24 @@ const addNewCategory = Joi.object({
     name: pointSchema,
 });
 
+const addNewPost = Joi.object({
+    title: pointSchema,
+    content: pointSchema,
+    userId: Joi.number().integer().required(),
+}).messages({
+    'number.base': SOME_REQUIRED_FIELDS,
+    'number.integer': SOME_REQUIRED_FIELDS,
+    'any.required': SOME_REQUIRED_FIELDS,
+});
+
+const addNewPostCategory = Joi.array().items(Joi.number().integer()).required().messages({
+    'number.base': 'one or more "categoryIds" not found',
+});
+
 module.exports = {
     addUserLogin,
     addNewUser,
     addNewCategory,
+    addNewPost,
+    addNewPostCategory,
 };
