@@ -19,10 +19,10 @@ const insert = async (postCategory, cats) => {
     if (error.type) return error;
     try {
         const result = await sequelize.transaction(async (t) => {
-          const post = await BlogPost.create(postCategory, { transaction: t });
-          const categories = cats.map((e) => ({ categoryId: e, postId: post.id }));
+          const blogPost = await BlogPost.create(postCategory, { transaction: t });
+          const categories = cats.map((e) => ({ categoryId: e, postId: blogPost.id }));
           await PostCategory.bulkCreate(categories, { transaction: t });
-          return post;
+          return blogPost;
         });
         return { type: '', message: result };
       } catch (err) {
