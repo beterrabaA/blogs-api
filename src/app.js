@@ -1,5 +1,5 @@
 const express = require('express');
-const { userController, catController } = require('./controller');
+const { userController, catController, postController } = require('./controller');
 // ...
 const validateJWT = require('./auth/validateJWT');
 
@@ -13,6 +13,8 @@ app.post('/user', userController.createUser);
 
 app.get('/categories', validateJWT, catController.getAll);
 app.post('/categories', validateJWT, catController.createCat);
+app.get('/posts', validateJWT, postController.getAll);
+app.post('/posts', validateJWT, postController.createPost);
 // ...
 
 // É importante exportar a constante `app`,
